@@ -21,10 +21,7 @@ export default function SSLChecker() {
       });
 
       const data = await res.json();
-
       setResult(data);
-    } catch {
-      alert("Failed to fetch SSL details");
     } finally {
       setLoading(false);
     }
@@ -32,67 +29,33 @@ export default function SSLChecker() {
 
   return (
     <ToolLayout
-      title="SSL Certificate Checker"
-      description="Check SSL certificate validity, issuer, and expiration date."
+      title="SSL Checker"
+      description="Check SSL certificate details for any domain."
     >
       <div className="space-y-6">
-
         <input
           type="text"
+          placeholder="google.com"
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
-          placeholder="example.com"
-          className="w-full p-4 rounded-2xl border border-zinc-200"
+          className="w-full p-4 border rounded-xl"
         />
 
         <button
           onClick={checkSSL}
-          className="px-6 py-3 rounded-2xl bg-violet-600 text-white"
+          className="px-6 py-3 bg-black text-white rounded-xl"
         >
           {loading ? "Checking..." : "Check SSL"}
         </button>
 
-        {result && !result.error && (
-          <div className="rounded-3xl border border-zinc-200 p-6 bg-white">
-
-            <div className="grid md:grid-cols-2 gap-4">
-
-              <div>
-                <strong>Valid:</strong>{" "}
-                {result.valid ? "Yes" : "No"}
-              </div>
-
-              <div>
-                <strong>Days Remaining:</strong>{" "}
-                {result.daysRemaining}
-              </div>
-
-              <div>
-                <strong>Valid From:</strong>{" "}
-                {result.validFrom}
-              </div>
-
-              <div>
-                <strong>Valid To:</strong>{" "}
-                {result.validTo}
-              </div>
-
-              <div>
-                <strong>Issuer:</strong>{" "}
-                {result.issuer}
-              </div>
-
-            </div>
-
+        {result && (
+          <div className="border rounded-xl p-6 bg-zinc-50">
+            <p><strong>Subject:</strong> {result.subject}</p>
+            <p><strong>Issuer:</strong> {result.issuer}</p>
+            <p><strong>Valid From:</strong> {result.validFrom}</p>
+            <p><strong>Valid To:</strong> {result.validTo}</p>
           </div>
         )}
-
-        {result?.error && (
-          <div className="text-red-600">
-            {result.error}
-          </div>
-        )}
-
       </div>
     </ToolLayout>
   );
