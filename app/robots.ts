@@ -7,6 +7,6 @@ export default function robots() {
       allow: "/",
     },
 
-    sitemap: "https://helpintech.com/sitemap.xml",
+    sitemap: "https://helpintech.cloud/sitemap.xml",
   };
 }
