@@ -2,7 +2,7 @@ import { tools } from "@/data/tools";
 
 export default function sitemap() {
 
-  const baseUrl = "https://helpintech.com";
+  const baseUrl = "https://helpintech.cloud";
 
   const toolPages = tools.map((tool) => ({
     url: `${baseUrl}/tools/${tool.slug}`,
