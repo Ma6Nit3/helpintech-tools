@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HelpInTech
 
-## Getting Started
+Modern open-source utilities platform for developers, networking engineers, cybersecurity professionals, Linux administrators, and DevOps teams.
 
-First, run the development server:
+🌐 Website: https://helpintech.cloud
+
+---
+
+## Features
+
+### Developer Tools
+
+* JSON Formatter
+* Base64 Encoder / Decoder
+* JWT Decoder
+* Regex Tester
+* HTML Preview
+* Markdown Previewer
+* URL Encoder / Decoder
+* UUID Generator
+* Random String Generator
+* Case Converter
+* Text Diff Checker
+
+### Networking Tools
+
+* DNS Lookup
+* IP Lookup
+* WHOIS Lookup
+* CIDR Calculator
+
+### Security Tools
+
+* Password Generator
+* Hash Generator
+* JWT Decoder
+
+### Linux & DevOps Tools
+
+* YAML Validator
+* Human Time to Cron Expression Generator
+* Timestamp Converter
+
+---
+
+## Technology Stack
+
+* Next.js 16
+* React 19
+* TypeScript
+* Tailwind CSS
+* Vercel Hosting
+* GitHub Actions CI/CD
+* Google Analytics 4
+
+---
+
+## Local Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ma6Nit3/helpintech-tools.git
+cd helpintech-tools
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Production Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run production locally:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## CI/CD
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project uses GitHub Actions for continuous integration.
+
+Every push to the `main` branch automatically:
+
+* Installs dependencies
+* Runs TypeScript checks
+* Builds the application
+* Validates deployment readiness
+
+Deployment is automatically handled by Vercel.
+
+---
+
+## Analytics
+
+Google Analytics 4 is integrated to monitor:
+
+* Active users
+* Traffic sources
+* Page views
+* User engagement
+
+---
+
+## Roadmap
+
+Planned tools:
+
+* SSL Checker
+* Subnet Calculator
+* Docker Compose Generator
+* HTTP Header Analyzer
+* Ping & Port Checker
+* Certificate Decoder
+
+---
+
+## Contributing
+
+Contributions, feature requests, and bug reports are welcome.
+
+If you find an issue, please open a GitHub Issue.
+
+---
+
+## License
+
+MIT License
+
+Copyright © 2026 HelpInTech
+
