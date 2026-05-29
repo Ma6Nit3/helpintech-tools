@@ -1,11 +1,12 @@
 import Script from "next/script";
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
+
 import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 
-
-export const metadata = {
+export const metadata: Metadata = {
   title: "HelpInTech - Modern Developer & IT Utilities",
   description:
     "Open source utilities platform for developers, networking engineers, cybersecurity professionals, Linux administrators, and DevOps teams.",
@@ -47,33 +48,38 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-<body>
+      <body>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-N61WWCRCEC"
+          strategy="afterInteractive"
+        />
 
-  <Script
-    src="https://www.googletagmanager.com/gtag/js?id=G-N61WWCRCEC"
-    strategy="afterInteractive"
-  />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-  <Script
-    id="google-analytics"
-    strategy="afterInteractive"
-  >
-    {`
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+            gtag('config', 'G-N61WWCRCEC');
+          `}
+        </Script>
 
-      gtag('config', 'G-N61WWCRCEC');
-    `}
-  </Script>
+        <Navbar />
 
-<>
-  <Navbar />
-  {children}
-  <Footer />
-</>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+          }}
+        />
 
-</body>
+        {children}
+
+        <Footer />
+      </body>
     </html>
   );
 }
