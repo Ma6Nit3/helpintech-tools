@@ -166,4 +166,11 @@ export const tools = [
     category: "Networking",
     popular: true,
   },
+
+  {
+    title: "SSL Checker",
+    slug: "ssl-checker",
+    category: "Security",
+    description: "Check SSL certificate validity and expiration dates."
+  }
 ];
