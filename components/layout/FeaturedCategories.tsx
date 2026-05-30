@@ -24,7 +24,11 @@ const categories = [
     title: "Linux & DevOps",
     description:
       "Docker, cron generators, permissions tools, YAML validation, and more.",
-    tools: ["Docker Compose", "Cron Generator", "chmod Calculator"],
+    tools: [
+  "Cron Generator",
+  "YAML Validator",
+  "Timestamp Converter",
+],
   },
 ];
 

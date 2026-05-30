@@ -32,17 +32,33 @@ export default function Hero() {
           </p>
 
 
-          <div className="mt-12 flex flex-wrap gap-5">
+<div className="mt-12 max-w-2xl">
 
-            <button className="px-8 py-4 rounded-2xl bg-zinc-950 text-white font-semibold hover:bg-zinc-800 hover:scale-[1.02] transition duration-200 shadow-xl">
-              Explore Tools
-            </button>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-            <button className="px-8 py-4 rounded-2xl border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-100 hover:border-violet-300 transition duration-200 font-semibold shadow-sm">
-              Browse Categories
-            </button>
+    <div className="rounded-2xl bg-white/70 border border-white p-4 backdrop-blur">
+      <div className="text-2xl font-black text-zinc-900">20+</div>
+      <div className="text-sm text-zinc-600">Tools</div>
+    </div>
 
-          </div>
+    <div className="rounded-2xl bg-white/70 border border-white p-4 backdrop-blur">
+      <div className="text-2xl font-black text-zinc-900">100%</div>
+      <div className="text-sm text-zinc-600">Free</div>
+    </div>
+
+    <div className="rounded-2xl bg-white/70 border border-white p-4 backdrop-blur">
+      <div className="text-2xl font-black text-zinc-900">0</div>
+      <div className="text-sm text-zinc-600">Signup Required</div>
+    </div>
+
+    <div className="rounded-2xl bg-white/70 border border-white p-4 backdrop-blur">
+      <div className="text-2xl font-black text-zinc-900">OSS</div>
+      <div className="text-sm text-zinc-600">Open Source</div>
+    </div>
+
+  </div>
+
+</div>
 
         </div>
 
