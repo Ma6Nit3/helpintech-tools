@@ -91,17 +91,17 @@ export const tools = [
   {
     title: "IP Lookup",
     slug: "ip-lookup",
-    description: "Lookup IP address and geolocation information instantly.",
     category: "Networking",
-    popular: true,
+    description:
+    "Lookup IP address geolocation, ISP and ASN information.",
   },
 
   {
     title: "WHOIS Lookup",
     slug: "whois-lookup",
-    description: "Lookup domain registration and WHOIS information instantly.",
     category: "Networking",
-    popular: true,
+    description:
+    "Lookup domain registration details, nameservers and expiry dates.",
   },
 
   {
@@ -172,5 +172,13 @@ export const tools = [
     slug: "ssl-checker",
     category: "Security",
     description: "Check SSL certificate validity and expiration dates."
+  },
+
+  {
+    title: "MX Lookup",
+    slug: "mx-lookup",
+    description: "Lookup MX records for any domain.",
+    category: "Networking",
+    popular: true,
   }
 ];
