@@ -188,5 +188,34 @@ export const tools = [
     description: "Check website security headers and identify missing protections.",
     category: "Security",
     popular: true,
-  }
+  },
+
+  {
+  title: "SPF Lookup",
+  slug: "spf-lookup",
+  category: "Networking",
+  description: "Lookup SPF DNS records."
+},
+
+{
+  title: "DMARC Lookup",
+  slug: "dmarc-lookup",
+  category: "Networking",
+  description: "Lookup DMARC DNS records."
+},
+
+{
+  title: "DKIM Lookup",
+  slug: "dkim-lookup",
+  category: "Networking",
+  description: "Lookup DKIM DNS records."
+},
+
+{
+  title: "HTTP Header Viewer",
+  slug: "http-header-viewer",
+  category: "Security",
+  description: "View all HTTP response headers."
+}
+
 ];
