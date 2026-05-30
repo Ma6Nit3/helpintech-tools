@@ -180,5 +180,13 @@ export const tools = [
     description: "Lookup MX records for any domain.",
     category: "Networking",
     popular: true,
+  },
+
+  {
+    title: "Security Headers Checker",
+    slug: "security-headers-checker",
+    description: "Check website security headers and identify missing protections.",
+    category: "Security",
+    popular: true,
   }
 ];
