@@ -11,9 +11,11 @@ export default function SearchTools() {
   const pathname = usePathname();
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const filteredTools = tools.filter((tool) =>
-    tool.title.toLowerCase().includes(query.toLowerCase())
-  );
+ const filteredTools = tools.filter((tool) =>
+  (tool.title || "")
+    .toLowerCase()
+    .includes(query.toLowerCase())
+);
 
   // Close on route change
   useEffect(() => {

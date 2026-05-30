@@ -4,180 +4,122 @@ import { useState } from "react";
 import ToolLayout from "@/components/tools/ToolLayout";
 
 export default function WhoisLookup() {
-
   const [domain, setDomain] = useState("");
+  const [result, setResult] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [result, setResult] = useState<{
-    registrar: string;
-    created: string;
-    expires: string;
-    status: string;
-    nameservers: string[];
-  } | null>(null);
+  const lookupWhois = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      setResult(null);
 
-  const lookupWhois = () => {
+      const response = await fetch("/api/whois", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          domain,
+        }),
+      });
 
-    if (!domain) return;
+      const data = await response.json();
 
-    setResult({
-      registrar: "Cloudflare Registrar",
-      created: "2021-08-12",
-      expires: "2027-08-12",
-      status: "clientTransferProhibited",
-      nameservers: [
-        "ns1.cloudflare.com",
-        "ns2.cloudflare.com",
-      ],
-    });
+      if (!response.ok) {
+        setError(data.error || "Lookup failed");
+        return;
+      }
+
+      setResult(data);
+    } catch {
+      setError("Unable to perform WHOIS lookup");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const copyText = async (value: string) => {
-
-    await navigator.clipboard.writeText(value);
-
-    alert("Copied!");
+  const getEvent = (name: string) => {
+    return result?.events?.find(
+      (event: any) => event.eventAction === name
+    )?.eventDate;
   };
 
   return (
-
     <ToolLayout
       title="WHOIS Lookup"
-      description="Lookup domain WHOIS information instantly online."
+      description="Lookup domain registration and ownership information."
     >
+      <div className="space-y-6">
 
-      <div className="rounded-[32px] border border-zinc-200 bg-white/80 backdrop-blur p-8 shadow-sm">
+        <input
+          type="text"
+          placeholder="google.com"
+          value={domain}
+          onChange={(e) => setDomain(e.target.value)}
+          className="w-full p-4 border border-zinc-200 rounded-xl bg-white text-zinc-900"
+        />
 
-        <div className="text-2xl font-bold text-zinc-900 mb-6">
-          Domain WHOIS Lookup
-        </div>
+        <button
+          onClick={lookupWhois}
+          className="px-6 py-3 rounded-xl bg-zinc-900 text-white"
+        >
+          {loading ? "Searching..." : "Lookup WHOIS"}
+        </button>
 
+        {error && (
+          <div className="p-4 rounded-xl border border-red-200 bg-red-50 text-red-700">
+            {error}
+          </div>
+        )}
 
-        <div className="flex flex-col md:flex-row gap-4">
+        {result && (
+          <div className="bg-white border border-zinc-200 rounded-xl p-6 space-y-4">
 
-          <input
-            type="text"
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-            placeholder="Enter domain name..."
-            className="flex-1 px-5 py-4 rounded-2xl border border-zinc-200 bg-white outline-none text-zinc-900 shadow-sm focus:border-violet-400 focus:ring-4 focus:ring-violet-100 transition duration-200"
-          />
+            <p>
+              <strong>Domain:</strong>{" "}
+              {result.ldhName}
+            </p>
 
+            <p>
+              <strong>Status:</strong>{" "}
+              {result.status?.join(", ") || "N/A"}
+            </p>
 
-          <button
-            onClick={lookupWhois}
-            className="px-8 py-4 rounded-2xl bg-zinc-950 text-white font-semibold hover:bg-zinc-800 hover:scale-[1.02] transition duration-200 shadow-lg"
-          >
-            Lookup WHOIS
-          </button>
+            <p>
+              <strong>Created:</strong>{" "}
+              {getEvent("registration") || "N/A"}
+            </p>
 
-        </div>
+            <p>
+              <strong>Updated:</strong>{" "}
+              {getEvent("last changed") || "N/A"}
+            </p>
+
+            <p>
+              <strong>Expiry:</strong>{" "}
+              {getEvent("expiration") || "N/A"}
+            </p>
+
+            <div>
+              <strong>Name Servers:</strong>
+
+              <ul className="mt-2 list-disc list-inside">
+                {result.nameservers?.map(
+                  (ns: any, index: number) => (
+                    <li key={index}>
+                      {ns.ldhName}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+          </div>
+        )}
 
       </div>
-
-
-      {result ? (
-
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-
-          <div className="rounded-[28px] border border-zinc-200 bg-gradient-to-r from-white to-violet-50/40 p-6 shadow-sm">
-
-            <div className="text-sm font-semibold uppercase tracking-wide text-violet-600">
-              Registrar
-            </div>
-
-            <div className="mt-3 text-2xl font-bold text-zinc-900">
-              {result.registrar}
-            </div>
-
-          </div>
-
-
-          <div className="rounded-[28px] border border-zinc-200 bg-gradient-to-r from-white to-blue-50/40 p-6 shadow-sm">
-
-            <div className="text-sm font-semibold uppercase tracking-wide text-violet-600">
-              Domain Status
-            </div>
-
-            <div className="mt-3 text-xl font-bold text-zinc-900 break-all">
-              {result.status}
-            </div>
-
-          </div>
-
-
-          <div className="rounded-[28px] border border-zinc-200 bg-gradient-to-r from-white to-violet-50/40 p-6 shadow-sm">
-
-            <div className="text-sm font-semibold uppercase tracking-wide text-violet-600">
-              Created On
-            </div>
-
-            <div className="mt-3 text-2xl font-bold text-zinc-900">
-              {result.created}
-            </div>
-
-          </div>
-
-
-          <div className="rounded-[28px] border border-zinc-200 bg-gradient-to-r from-white to-blue-50/40 p-6 shadow-sm">
-
-            <div className="text-sm font-semibold uppercase tracking-wide text-violet-600">
-              Expiry Date
-            </div>
-
-            <div className="mt-3 text-2xl font-bold text-zinc-900">
-              {result.expires}
-            </div>
-
-          </div>
-
-
-          <div className="rounded-[28px] border border-zinc-200 bg-gradient-to-r from-white to-violet-50/40 p-6 shadow-sm md:col-span-2">
-
-            <div className="flex items-center justify-between">
-
-              <div className="text-sm font-semibold uppercase tracking-wide text-violet-600">
-                Name Servers
-              </div>
-
-              <button
-                onClick={() =>
-                  copyText(result.nameservers.join(", "))
-                }
-                className="px-5 py-2 rounded-xl bg-zinc-950 text-white text-sm font-medium hover:bg-zinc-800 transition duration-200"
-              >
-                Copy
-              </button>
-
-            </div>
-
-
-            <div className="mt-5 space-y-3">
-
-              {result.nameservers.map((ns, index) => (
-
-                <div
-                  key={index}
-                  className="rounded-xl border border-zinc-200 bg-white p-4 font-mono text-zinc-900"
-                >
-                  {ns}
-                </div>
-
-              ))}
-
-            </div>
-
-          </div>
-
-        </div>
-
-      ) : (
-
-        <div className="mt-14 rounded-2xl border border-dashed border-zinc-300 bg-white/60 p-10 text-center text-zinc-500">
-          No WHOIS information found
-        </div>
-
-      )}
-
     </ToolLayout>
   );
 }
